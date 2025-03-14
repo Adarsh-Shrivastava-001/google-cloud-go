@@ -1919,7 +1919,7 @@ func newReadWriteStmtBasedTransactionWithSessionHandle(ctx context.Context, c *C
 		t   *ReadWriteStmtBasedTransaction
 	)
 	if sh == nil {
-		sh, err = c.idleSessions.take(ctx)
+		sh, err = c.idleSessions.takeMultiplexed(ctx)
 		if err != nil {
 			// If session retrieval fails, just fail the transaction.
 			return nil, err
